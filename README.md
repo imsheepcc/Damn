@@ -693,48 +693,11 @@ response = create_success_response(
 # 1. 确保有Python 3.8+
 python --version
 
-# 2. 创建logs目录
-mkdir logs
 
-# 3. 运行测试
+# 2. 运行测试
 python examples.py
 ```
 
-### 8.2 第一个示例
-
-```python
-from core_models import create_mock_context, Stage
-from module_interface import ModuleInterface
-from core_models import ModuleResponse
-
-# 1. 创建一个简单模块
-class SimpleModule(ModuleInterface):
-    
-    def should_activate(self, context):
-        return context.current_stage == Stage.PROBLEM_CLARIFICATION
-    
-    def process(self, context):
-        return ModuleResponse(
-            success=True,
-            assistant_message="Hello! Let's solve this together.",
-            next_stage=Stage.THOUGHT_ARTICULATION,
-            context_updates={},
-            metadata={}
-        )
-
-# 2. 创建测试上下文
-context = create_mock_context(
-    problem_text="Find two numbers that sum to target"
-)
-
-# 3. 测试模块
-module = SimpleModule()
-if module.should_activate(context):
-    response = module.process(context)
-    print(response.assistant_message)
-```
-
----
 
 
 
