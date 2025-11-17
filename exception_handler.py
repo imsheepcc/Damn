@@ -20,6 +20,7 @@ from core_models import (
     CRITICAL_STAGES
 )
 from module_interface import ModuleInterface
+import os
 
 
 # ==================== 异常类定义 ====================
@@ -65,6 +66,8 @@ class ExceptionHandler:
         # 控制台处理器
         ch = logging.StreamHandler()
         ch.setLevel(logging.INFO)
+
+        os.makedirs("logs", exist_ok=True)
         
         # 文件处理器
         fh = logging.FileHandler(
